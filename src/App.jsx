@@ -199,7 +199,7 @@ function RCard({ row, labels, index }) {
   return (
     <div style={{ background: T.white, border: `1px solid ${T.border}`, borderRadius: 12, padding: 14 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-        <span style={{ fontSize: 10, fontFamily: "monospace", color: "#94a3b8" }}>{row._file || `record #${index + 1}`}</span>
+        <span style={{ fontSize: 10, fontFamily: "monospace", color: "#94a3b8" }}>{ row._file  ? row._file.split('.').slice(-2).join('.') : `record #${index + 1}`}</span>
         <span style={{ fontSize: 10, fontWeight: 700, background: T.greenBg, color: T.green, padding: "1px 8px", borderRadius: 20, border: `1px solid ${T.greenBorder}` }}>MATCHED</span>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: "8px 14px" }}>
@@ -234,8 +234,8 @@ function RCard({ row, labels, index }) {
 // ── MAIN ─────────────────────────────────────────────────────────────────────────
 
 export default function AQFv2() {
-  const [dataDir, setDataDir] = useState("dataset/orbda10k");         // committed — triggers load
-  const [pendingDir, setPendingDir] = useState("dataset/orbda10k");   // input buffer — does NOT trigger load
+  const [dataDir, setDataDir] = useState("dataset/orbda1");         // committed — triggers load
+  const [pendingDir, setPendingDir] = useState("dataset/orbda1");   // input buffer — does NOT trigger load
   const [loading, setLoading] = useState(true);
   const [loadErr, setLoadErr] = useState(null);
   const [formDef, setFormDef] = useState(null);
