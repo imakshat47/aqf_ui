@@ -234,8 +234,8 @@ function RCard({ row, labels, index }) {
 // ── MAIN ─────────────────────────────────────────────────────────────────────────
 
 export default function AQFv2() {
-  const [dataDir, setDataDir] = useState("backend/dataset/orbda10k");         // committed — triggers load
-  const [pendingDir, setPendingDir] = useState("backend/dataset/orbda10k");   // input buffer — does NOT trigger load
+  const [dataDir, setDataDir] = useState("dataset/orbda10k");         // committed — triggers load
+  const [pendingDir, setPendingDir] = useState("dataset/orbda10k");   // input buffer — does NOT trigger load
   const [loading, setLoading] = useState(true);
   const [loadErr, setLoadErr] = useState(null);
   const [formDef, setFormDef] = useState(null);
