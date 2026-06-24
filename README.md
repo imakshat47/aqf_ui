@@ -1,16 +1,38 @@
-# React + Vite
+# AQF UI V7 Runtime Patch
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This patch builds the AQF UI directly from runtime artifacts in `public/runtime/`:
 
-Currently, two official plugins are available:
+- `canonical_form.json`
+- `field_statistics.json`
+- `adaptive_form.json` (loaded as a fallback/extra source)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+It only uses the backend for query execution:
 
-## React Compiler
+- `POST /query/search`
+- `GET /query/suggestions/{field_path}`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Expected local structure
 
-## Expanding the ESLint configuration
+```text
+your-frontend/
+  public/
+    runtime/
+      canonical_form.json
+      field_statistics.json
+      adaptive_form.json
+  src/
+    ...
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Run
+
+```powershell
+npm install
+npm run dev
+```
+
+Set backend URL through:
+
+```env
+VITE_API_BASE_URL=http://localhost:8000
+```
