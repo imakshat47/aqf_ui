@@ -17,15 +17,19 @@ export async function runQuery(payload) {
   return await res.json()
 }
 
-export async function getSuggestions(fieldPath) {
-  try {
+export async function getHealth() {
+   try {
     const res = await fetch(
-      `${API_BASE_URL.replace(/\/$/, '')}/suggestions/${encodeURIComponent(fieldPath)}`,
+      `${API_BASE_URL.replace(/\/$/, '')}/health`,
       { cache: 'no-store' }
     )
-    if (!res.ok) return { suggestions: [] }
+    if (!res.ok) return  { status: "offline"}
     return await res.json()
   } catch {
-    return { suggestions: [] }
+    return { status: "offline"}
   }
+}
+
+export async function getSuggestions(fieldPath) {
+  return { suggestions: [] }
 }

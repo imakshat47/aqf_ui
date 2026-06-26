@@ -4,7 +4,7 @@ import AQFFormBuilder from './components/AQFFormBuilder'
 import QueryPreview from './components/QueryPreview'
 import ResultsTable from './components/ResultsTable'
 import { loadRuntimeData, buildFieldIndex } from './services/runtimeLoader'
-import { runQuery } from './services/queryApi'
+import { runQuery, getHealth } from './services/queryApi'
 import { buildDefaultSelections } from './utils/fieldGrouping'
 import './styles.css'
 
@@ -22,6 +22,18 @@ function buildInitialFieldState(groups) {
     })
   })
   return state
+}
+
+function HealthStatus() {
+  const [status, setStatus] = useState('loading');
+
+  useEffect(() => {
+    getHealth().then((health) => {
+      setStatus(health.status);
+    });
+  }, []);
+
+  return <i>{status}</i>;
 }
 
 function collectPayload(groups, selectedGroups, selectedSections, fieldState) {
@@ -170,7 +182,7 @@ export default function App() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <span style={{ fontSize: '11px', fontWeight: '600', color: '#0f766e', background: '#ccfbf1', padding: '4px 10px', borderRadius: '12px', textTransform: 'uppercase' }}>
-            openEHR ORBDA Environment
+            openEHR ORBDA Environment [<HealthStatus />]
           </span>
         </div>
       </header>

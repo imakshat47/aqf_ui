@@ -17,22 +17,22 @@ export default function FieldControl({ field, valueState, onChange }) {
   const [suggestions, setSuggestions] = useState([])
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    let alive = true
-    ;(async () => {
-      setLoading(true)
-      try {
-        const data = await getSuggestions(field.path || field.key || field.label)
-        if (!alive) return
-        setSuggestions((data?.suggestions || []).slice(0, 8))
-      } catch {
-        if (!alive) return
-      } finally {
-        if (alive) setLoading(false)
-      }
-    })()
-    return () => { alive = false }
-  }, [field.path, field.key, field.label])
+  // useEffect(() => {
+  //   // let alive = true
+  //   // ;(async () => {
+  //   //   setLoading(true)
+  //     // try {
+  //     //   const data = await getSuggestions(field.path || field.key || field.label)
+  //     //   if (!alive) return
+  //     //   setSuggestions((data?.suggestions || []).slice(0, 8))
+  //     // } catch {
+  //     //   if (!alive) return
+  //     // } finally {
+  //     //   if (alive) setLoading(false)
+  //     // }
+  //   })()
+  //   return () => { alive = false }
+  // }, [field.path, field.key, field.label])
 
   const operatorOptions = useMemo(() => {
     const ops = field.recommended_operators || ['is', 'is not', 'contains', 'starts with']
